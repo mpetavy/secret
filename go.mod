@@ -2,7 +2,7 @@ module secret
 
 go 1.23.2
 
-require github.com/mpetavy/common v1.9.54
+require github.com/mpetavy/common v1.9.55
 
 require (
 	github.com/bahlo/generic-list-go v0.2.0 // indirect
@@ -47,4 +47,4 @@ require (
 	software.sslmate.com/src/go-pkcs12 v0.2.0 // indirect
 )
 
-replace github.com/mpetavy/common => ../common
+//replace github.com/mpetavy/common => ../common

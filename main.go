@@ -25,7 +25,7 @@ func run() error {
 		return fmt.Errorf("SECRETKEY environment variable not set")
 	}
 
-	if common.IsStringEnrypted(*txt) {
+	if common.IsEncrypted(*txt) {
 		m, err := common.DecryptString([]byte(key), *txt)
 		if common.Error(err) {
 			return err

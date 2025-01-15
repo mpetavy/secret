@@ -12,7 +12,7 @@ import (
 var resources embed.FS
 
 var (
-	txt = flag.String("t", "", "secret value")
+	_ = flag.String("t", "", "secret value")
 )
 
 func init() {
@@ -25,15 +25,19 @@ func run() error {
 		return fmt.Errorf("SECRETKEY environment variable not set")
 	}
 
-	if common.IsEncrypted(*txt) {
-		m, err := common.DecryptString([]byte(key), *txt)
+	// cannot use flag "t" because any given secret as flag is auto decrypted bei "common". So, must use the os.Args
+
+	txt := common.FlagValue("t")
+
+	if common.IsEncrypted(txt) {
+		m, err := common.DecryptString([]byte(key), txt)
 		if common.Error(err) {
 			return err
 		}
 
 		fmt.Printf("%s\n", m)
 	} else {
-		m, err := common.EncryptString([]byte(key), *txt)
+		m, err := common.EncryptString([]byte(key), txt)
 		if common.Error(err) {
 			return err
 		}
